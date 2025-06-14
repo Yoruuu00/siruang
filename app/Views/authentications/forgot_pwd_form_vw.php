@@ -23,7 +23,7 @@
                 <div class="alert info"><?= esc(session()->getFlashdata('info')) ?></div>
             <?php endif; ?>
     
-            <form action="<?= base_url('forgot-pwd') ?>" method="post">
+            <form action="<?= route_to('send_reset_link') ?>" method="post">
                 <?= csrf_field() ?>
                 <div class="form-group">
                     <label for="email">Email</label>
@@ -35,7 +35,7 @@
                 <button type="submit" class="submit-button">Kirim Link Reset</button>
             </form>
             <div class="back-link">
-                <a href="<?= base_url('login') ?>">Kembali ke Halaman Login</a>
+                <a href="<?= route_to('login') ?>">Kembali ke Halaman Login</a>
             </div>
         </div>
     </div>

@@ -51,7 +51,7 @@ class Peminjaman extends BaseController {
         // menghapus peminjaman
         $this->peminjamanModel->delete($id);
 
-        return redirect()->to('/admin/dashboard');
+        return redirect()->to(route_to('admin_dashboard'));
     }
 
     public function save() {
@@ -96,6 +96,6 @@ class Peminjaman extends BaseController {
             session()->setFlashdata('success', 'Peminjaman Berhasil Diajukan.');
         }
 
-        return redirect()->to('/admin/dashboard');
+        return redirect()->to(route_to('admin_dashboard'));
     }
 }

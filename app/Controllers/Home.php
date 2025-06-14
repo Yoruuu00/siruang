@@ -53,7 +53,7 @@ class Home extends BaseController {
         }
 
         // login button dynamic
-        $loginBtnUrl = base_url('/login');
+        $loginBtnUrl = route_to('login');
         $loginBtnTxt = 'LOGIN';
 
         if(session()->get('isLoggedIn')) {

@@ -21,7 +21,7 @@
             <div class="data-container">
                 <h3>DATA PEMINJAMAN RUANGAN</h3>
 
-                <?= view('components/searchs', ['ruangan_list' => $ruangan_list, 'search_params' => $search_params, 'base_url_for_search' => 'admin/dashboard']); ?>
+                <?= view('components/searchs', ['ruangan_list' => $ruangan_list, 'search_params' => $search_params, 'base_url_for_search' => 'admin_dashboard']); ?>
 
                 <div class="table-container">
                     <table>
@@ -47,8 +47,8 @@
                                 <tr>
                                     <td><?= $no++; ?></td>
                                     <td>
-                                        <a href="<?= base_url('admin/peminjaman/edit/'. $p['id_peminjaman']); ?>"><i class="fa-solid fa-pen-to-square"></i></a> |
-                                        <a href="<?= base_url('admin/peminjaman/delete/'. $p['id_peminjaman']); ?>"><i class="fa-solid fa-trash" onclick=" return confirm('Yakin Ingin Menghapus Data Peminjaman Ini?')"></i></a>
+                                        <a href="<?= base_url(route_to('admin_edit_peminjaman', $p['id_peminjaman'])); ?>"><i class="fa-solid fa-pen-to-square"></i></a> |
+                                        <a href="<?= base_url(route_to('admin_delete_peminjaman', $p['id_peminjaman'])); ?>"><i class="fa-solid fa-trash" onclick=" return confirm('Yakin Ingin Menghapus Data Peminjaman Ini?')"></i></a>
                                     </td>
                                     <td><?= esc($p['username']); ?></td>
                                     <td><?= esc($p['nama_dosen']); ?></td>

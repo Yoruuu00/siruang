@@ -16,19 +16,19 @@
                     <?php if(session()->getFlashdata('validation')): ?>
                         <?= session()->getFlashdata('validation')->listErrors(); ?>
                     <?php endif; ?> 
-                    <form action="<?= base_url('/register/auth') ?>" method="post">
+                    <form action="<?= route_to('register_auth') ?>" method="post">
                         <?= csrf_field() ?>
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" id="username" name="username" class="form-control" placeholder="Masukkan username" required />
+                            <input type="text" id="username" name="username" class="form-control" placeholder="Masukkan username" value="<?= old('username') ?>" required />
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" class="form-control" placeholder="Masukkan email" required />
+                            <input type="email" id="email" name="email" class="form-control" placeholder="Masukkan email" value="<?= old('email') ?>" required />
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" id="password" name="password" class="form-control" placeholder="Masukkan password" required />
+                            <input type="password" id="password" name="password" class="form-control" placeholder="Masukkan password" value="<?= old('password') ?>" required />
                         </div>
                         <div class="form-group">
                             <label for="confirm_password">Confirm Password</label>
@@ -36,11 +36,11 @@
                         </div>
                         <div class="form-group">
                             <label for="nomor_telepon">Nomor Telepon</label>
-                            <input type="password" id="nomor_telepon" name="nomor_telepon" class="form-control" placeholder="Masukkan Nomor Telepon" required />
+                            <input type="tel" id="nomor_telepon" name="nomor_telepon" class="form-control" placeholder="Masukkan Nomor Telepon" value="<?= old('nomor_telepon') ?>" required />
                         </div>
                         <button type="submit" class="btn-login" name="submit">Daftar</button>
                     </form>
-                    <p class="register-text">Sudah punya akun? <a href="<?= base_url('login') ?>" class="register-link">Login</a></p>
+                    <p class="register-text">Sudah punya akun? <a href="<?= route_to('login') ?>" class="register-link">Login</a></p>
                 </div>
             </div>
         </div>

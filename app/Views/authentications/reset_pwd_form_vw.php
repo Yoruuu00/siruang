@@ -16,7 +16,7 @@
                 <?= session()->getFlashdata('validation')->listErrors() ?>
             <?php endif; ?>
     
-            <form action="<?= base_url('reset-pwd') ?>" method="post">
+            <form action="<?= route_to('reset_password') ?>" method="post">
                 <?= csrf_field() ?>
                 <input type="hidden" name="token" value="<?= esc($token) ?>">
                 <div class="form-group">

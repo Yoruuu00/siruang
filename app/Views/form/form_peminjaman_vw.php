@@ -11,7 +11,7 @@
     <div class="container">
         <h1><?= isset($peminjaman['id_peminjaman']) ? 'EDIT PEMINJAMAN RUANGAN' : 'FORM PEMINJAMAN RUANGAN' ?></h1>
         <div class="form-container">
-            <form action="<?= base_url(session()->get('role') == 'admin' ? 'admin/peminjaman/save' : 'user/peminjaman/save') ?>" method="post">
+            <form action="<?= base_url(route_to(session()->get('role') == 'admin' ? 'admin_save_peminjaman' : 'user_save_peminjaman')) ?>" method="post">
                 <?= csrf_field() ?>
 
                 <?php if(isset($peminjaman['id_peminjaman'])): ?>

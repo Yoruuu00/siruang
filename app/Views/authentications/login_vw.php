@@ -16,7 +16,7 @@
                     <?php if(session()->getFlashdata('error')): ?>
                         <p style="color: red;"><?= session()->getFlashdata('error'); ?></p>
                     <?php endif; ?>
-                    <form action="<?= base_url('/login/auth') ?>" method="post">
+                    <form action="<?= route_to('login_auth') ?>" method="post">
                         <?= csrf_field() ?>
                         <div class="form-group">
                             <label for="username">Username</label>
@@ -26,10 +26,10 @@
                             <label for="password">Password</label>
                             <input type="password" id="password" name="password" class="form-control" placeholder="Masukkan password" required>
                         </div>
-                        <p class="btn-fg-pwd"><a href="<?= base_url('forgot-pwd') ?>" >Lupa Password</a></p>
+                        <p class="btn-fg-pwd"><a href="<?= route_to('forgot_password') ?>" >Lupa Password</a></p>
                         <button type="submit" class="btn-login">Login</button>
                     </form>
-                    <p class="register-text">Belum punya akun? <a href="<?= base_url('register') ?>" class="register-link">Daftar</a></p>
+                    <p class="register-text">Belum punya akun? <a href="<?= route_to('register') ?>" class="register-link">Daftar</a></p>
                     <p class="btn-home"><a href="<?= base_url('/') ?>" >Kembali ke Halaman Utama</a></p>
                 </div>
             </div>

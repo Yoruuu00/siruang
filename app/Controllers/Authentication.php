@@ -33,8 +33,8 @@ class Authentication extends BaseController
                     'isLoggedIn' => true,
                     'role' => $user['role']
                 ]);
-                if($user['role'] == 'admin') return redirect()->to('/admin/dashboard')->with('success', 'Anda Berhasil Login!');
-                else {return redirect()->to('/user/dashboard')->with('success', 'Anda Berhasil Login!');}
+                if($user['role'] == 'admin') {return redirect()->to(route_to('admin_dashboard'))->with('success', 'Anda Berhasil Login!');}
+                else {return redirect()->to(route_to('user_dashboard'))->with('success', 'Anda Berhasil Login!');}
             }
             else {
                 return redirect()->back()->with('error', 'Password yang anda masukkan salah!');
@@ -81,7 +81,7 @@ class Authentication extends BaseController
             ]
         ];
         if(!$this->validate($validateRules)) {
-            return redirect()->back()->with('validation', $this->validator);
+            return redirect()->back()->withInput()->with('validation', $this->validator);
         }
 
         $userData = [
@@ -93,7 +93,7 @@ class Authentication extends BaseController
         
         $this->userModel->insert($userData);
     
-        return redirect()->to('/login')->with('success', "Berhasil Melakukan Register");
+        return redirect()->to(route_to('login'))->with('success', "Berhasil Melakukan Register");
         
     }
 
@@ -120,8 +120,8 @@ class Authentication extends BaseController
         $user = $this->userModel->where('email', $email)->first();
 
         if(empty($user)) {
-            session()->setFlashdata('info', 'Jika Email sesuai, maka anda akan mendapat link reset password');
-            return redirect()->to(route_to('forgot-pwd'));
+            session()->setFlashdata('error', 'Email Tidak Ditemukan!');
+            return redirect()->to(route_to('forgot_password'));
         }
 
         $tokenresetPwd = bin2hex(random_bytes(32));
@@ -138,7 +138,7 @@ class Authentication extends BaseController
         $emailService->setSubject('Reset Password Anda');
 
         // buat link reset pwd
-        $resetLink = url_to('reset-pwd') . '?token=' . $tokenresetPwd;
+        $resetLink = url_to('reset_password_form') . '?token=' . $tokenresetPwd;
         $message = view('email/reset_pwd_email_vw', ['resetLink' => $resetLink, 'username' => $user['username']]);
         $emailService->setMessage($message);
 
@@ -149,7 +149,7 @@ class Authentication extends BaseController
             session()->setFlashdata('error', 'Link reset password gagal terkirim, coba beberapa saat lagi');
 
         }
-        return redirect()->to(route_to('forgot-pwd'));
+        return redirect()->to(route_to('forgot_password'));
     }
 
     public function resetPwdForm() {

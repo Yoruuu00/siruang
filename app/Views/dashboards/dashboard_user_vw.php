@@ -20,9 +20,9 @@
         <main>
             <div class="data-container">
                 <h3>DATA PEMINJAMAN RUANGAN</h3>
-                <a href="<?= base_url('user/peminjaman') ?>" class="tambah-button"><i class="fa-solid fa-plus"></i> Tambah</a>
+                <a href="<?= route_to('user_add_peminjaman') ?>" class="tambah-button"><i class="fa-solid fa-plus"></i> Tambah</a>
 
-                <?= view('components/searchs', ['ruangan_list' => $ruangan_list, 'search_params' => $search_params, 'base_url_for_search' => 'user/dashboard']); ?>
+                <?= view('components/searchs', ['ruangan_list' => $ruangan_list, 'search_params' => $search_params, 'base_url_for_search' => 'user_dashboard']); ?>
 
                 <div class="table-container">
                     <table>
@@ -49,8 +49,8 @@
                                     <td><?= $no++; ?></td>
                                     <td>
                                         <?php if(session()->get('id_user') === $p['id_pengguna']): ?>
-                                            <a href="<?= base_url('user/peminjaman/edit/'. $p['id_peminjaman']); ?>"><i class="fa-solid fa-pen-to-square"></i></a> | 
-                                            <a href="<?= base_url('user/peminjaman/delete/'. $p['id_peminjaman']); ?>" onclick=" return confirm('Yakin Ingin Menghapus Data Peminjaman Ini?')"><i class="fa-solid fa-trash"></i></a>
+                                            <a href="<?= base_url(route_to('user_edit_peminjaman', $p['id_peminjaman'])); ?>"><i class="fa-solid fa-pen-to-square"></i></a> | 
+                                            <a href="<?= base_url(route_to('user_delete_peminjaman', $p['id_peminjaman'])); ?>" onclick=" return confirm('Yakin Ingin Menghapus Data Peminjaman Ini?')"><i class="fa-solid fa-trash"></i></a>
                                         <?php endif; ?>
                                     </td>
                                     <td><?= esc($p['username']); ?></td>
@@ -78,8 +78,8 @@
                 </div>
             </div>
         </main>
-        <a href="<?= base_url("/") ?>" class="back-button">Kembali</a>
-        <a href="<?= base_url('/logout') ?>" class="logout-button">LogOut</a>
+        <a href="<?= base_url('/') ?>" class="back-button">Kembali</a>
+        <a href="<?= base_url('logout') ?>" class="logout-button">LogOut</a>
     </div>
     <script>
         <?php if(session()->getFlashdata('success')): ?>

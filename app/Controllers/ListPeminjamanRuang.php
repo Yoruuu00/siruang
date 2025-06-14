@@ -33,7 +33,7 @@ class ListPeminjamanRuang extends BaseController{
         $pager = $this->peminjamanModel->pager;
 
         // login button dynamic
-        $loginBtnUrl = base_url('/login');
+        $loginBtnUrl = route_to('login');
         $loginBtnTxt = 'LOGIN';
 
         if(session()->get('isLoggedIn')) {

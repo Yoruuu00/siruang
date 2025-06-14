@@ -61,3 +61,4 @@ rekap gawian 13/6/2025
 rekap gawian 14/6/2025
 * menggunakan base_url untuk action di post
 * menggunakan csrf_field untuk form dengan method post
+* memperbaiki route dengan menambah alias

@@ -1,5 +1,5 @@
                 <div class="search-container">
-                    <form action="<?= base_url($base_url_for_search) ?>" method="get" class="search-form">
+                    <form action="<?= base_url(route_to($base_url_for_search)) ?>" method="get" class="search-form">
                         <div class="search-group">
                             <label for="search_ruangan">Ruangan:</label>
                             <select id="search_ruangan" name="ruangan">
