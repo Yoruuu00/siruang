@@ -24,11 +24,9 @@ input, textarea, select {
     padding-right: 30px; 
 }
 
-/* icon font awesome */
 .fa-pen-to-square {color:goldenrod;}
 .fa-trash {color: red;}
 
-/* header */
 header {
     display: flex;
     justify-content: space-between;
