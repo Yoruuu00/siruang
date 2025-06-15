@@ -16,7 +16,7 @@ body {
 
 /* Header  */
 header {
-    background-color: white;
+    background-color: rgb(57, 205, 255);
     border-bottom: 1px solid #e5e7eb;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
