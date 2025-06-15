@@ -21,7 +21,7 @@
             <div class="data-container">
                 <h3>DATA PEMINJAMAN RUANGAN</h3>
 
-                <?= view('components/searchs', ['ruangan_list' => $ruangan_list, 'search_params' => $search_params, 'base_url_for_search' => '/peminjaman']); ?>
+                <?= view('components/searchs', ['ruangan_list' => $ruangan_list, 'search_params' => $search_params, 'base_url_for_search' => 'peminjaman']); ?>
                 
                 <div class="table-container">
                     <table>

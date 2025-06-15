@@ -57,7 +57,7 @@ class Home extends BaseController {
         $loginBtnTxt = 'LOGIN';
 
         if(session()->get('isLoggedIn')) {
-            $loginBtnUrl = session()->get('role') == 'admin' ? base_url('/admin/dashboard') : base_url('/user/dashboard');
+            $loginBtnUrl = session()->get('role') == 'admin' ? route_to('admin_dashboard') : route_to('user_dashboard');
             $loginBtnTxt = 'Dashboard';
         }
 
@@ -68,7 +68,7 @@ class Home extends BaseController {
             'loginbtnurl' => $loginBtnUrl,
             'loginbtntxt' => $loginBtnTxt,
         ];
-
+        
         return view('Home_vw', $data);
     }
 }

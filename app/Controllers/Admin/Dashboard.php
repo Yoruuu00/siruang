@@ -43,7 +43,7 @@ class Dashboard extends BaseController {
                 'tanggal' => $searchTanggal
             ]
         ];
-
+        dd($data);
         return view('dashboards/dashboard_admin_vw', $data);
     }
 }
