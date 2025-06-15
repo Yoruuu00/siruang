@@ -63,8 +63,11 @@
                 <div class="pagination-link">
                     <?= $pager->links('peminjaman_list', 'default_full'); ?>
                 </div>
-
-                <a href="/" class="back-button">Kembali</a>
+                
+                <div class="navigation-buttons">
+                    <a href="/" class="back-button">Kembali</a>
+                    <a href="<?= route_to('fasilitas_ruangan') ?>" class="fasilitas-button">LIHAT FASILITAS RUANGAN</a>
+                </div>
             </div>
         </main>
     </div>

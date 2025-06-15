@@ -7,6 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 $routes->get('peminjamanwefcwf','ListPeminjamanRuang::index', ['as' => 'peminjaman']);
+$routes->get('fasilitas-ruanganonewsikuf', 'ListFasilitasRuangan::index', ['as' => 'fasilitas_ruangan']);
 
 $routes->get('loginwedAWecfwed', 'Authentication::login', ['as' => 'login']);
 $routes->post('loginhwdsecawe', 'Authentication::loginauth', ['as' => 'login_auth']);

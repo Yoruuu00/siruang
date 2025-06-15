@@ -52,6 +52,6 @@ class ListPeminjamanRuang extends BaseController{
                 'tanggal' => $searchTanggal
                 ]
         ];
-        return view('listPeminjaman/list_peminjaman_ruang_vw', $data);
+        return view('list/list_peminjaman_ruang_vw', $data);
     }
 }
