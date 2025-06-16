@@ -135,20 +135,16 @@ class Authentication extends BaseController
         // untuk kirim email ke user
         $emailService = service('email');
         $emailService->setTo($user['email']);
-        $emailService->setSubject('Reset Password Anda');
+        $emailService->setSubject('Reset Password Akun SIRUANG Anda');
 
         // buat link reset pwd
         $resetLink = url_to('reset_password_form') . '?token=' . $tokenresetPwd;
         $message = view('email/reset_pwd_email_vw', ['resetLink' => $resetLink, 'username' => $user['username']]);
         $emailService->setMessage($message);
 
-        if($emailService->send()) {
-            session()->setFlashdata('success', 'Link reset password telah terkirim');
-        }
-        else {
-            session()->setFlashdata('error', 'Link reset password gagal terkirim, coba beberapa saat lagi');
+        if($emailService->send()) {session()->setFlashdata('success', 'Link reset password telah terkirim');}
+        else {session()->setFlashdata('error', 'Link reset password gagal terkirim, coba beberapa saat lagi');}
 
-        }
         return redirect()->to(route_to('forgot_password'));
     }
 

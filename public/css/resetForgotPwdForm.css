@@ -70,6 +70,7 @@ input{
 .alert.error,
 ul {  
    color: red; 
+   padding-right: 15px;
 }
 
 .alert.success,

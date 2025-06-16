@@ -19,6 +19,6 @@ class ListFasilitasRuangan extends BaseController {
             'ruangan' => $this->ruanganModel->findAll(),
         ];
 
-        return view('list/LihatRuangan', $data);
+        return view('list/list_fasilitas_ruangan_vw', $data);
     }
 }
