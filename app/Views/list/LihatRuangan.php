@@ -56,7 +56,9 @@
                         <?php foreach($rg['fasilitas'] as $f): ?>
                             <div class="facilities-grid">
                                 <div class="facility-item">
-                                    <span><?= $f['nama_fasilitas']; ?>: <?= $f['jumlah_fasilitas']; ?> Unit</span>
+                                   <ul>
+                                        <li><span><?= $f['nama_fasilitas']; ?>: <?= $f['jumlah_fasilitas']; ?> Unit</span></li>
+                                   </ul> 
                                 </div>
                             </div>
                         <?php endforeach; ?>

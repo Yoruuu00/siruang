@@ -74,9 +74,11 @@
                     <?= $pager->links('peminjaman_list', 'default_full'); ?>
                 </div>
             </div>
+            <div class="navigation-btn-dashboard">
+                <a href="<?= base_url("/") ?>" class="back-button">Kembali</a>
+                <a href="<?= base_url('/logout') ?>" class="logout-button">LogOut</a>
+            </div>
         </main>
-        <a href="<?= base_url("/") ?>" class="back-button">Kembali</a>
-        <a href="<?= base_url('/logout') ?>" class="logout-button">LogOut</a>
     </div>
     <script>
         <?php if(session()->getFlashdata('success')): ?>

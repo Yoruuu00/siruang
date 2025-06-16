@@ -11,6 +11,9 @@
     <div class="container">
         <h1><?= isset($peminjaman['id_peminjaman']) ? 'EDIT PEMINJAMAN RUANGAN' : 'FORM PEMINJAMAN RUANGAN' ?></h1>
         <div class="form-container">
+            <?php if(session()->getFlashdata('error')): ?>
+                <p class="error"><?= session()->getFlashdata('error'); ?></p>
+            <?php endif; ?>
             <form action="<?= base_url(route_to(session()->get('role') == 'admin' ? 'admin_save_peminjaman' : 'user_save_peminjaman')) ?>" method="post">
                 <?= csrf_field() ?>
 
@@ -27,7 +30,7 @@
                         <select id="nama_dosen" name="id_dosen" required>
                             <option value="">-- Pilih Dosen --</option>
                             <?php foreach($dosen as $d):?>
-                                <option value="<?= $d['id_dosen']; ?>" <?= (isset($peminjaman['id_dosen']) && ($peminjaman['id_dosen'] == $d['id_dosen'])) ? 'selected' : ''; ?> > <?= $d['nama_dosen'] ?></option>
+                                <option value="<?= $d['id_dosen']; ?>" <?= old('id_dosen', $peminjaman['id_dosen'] ?? '') == $d['id_dosen'] ? 'selected' : ''; ?> > <?= $d['nama_dosen'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -42,7 +45,7 @@
                         <select id="nama_matkul" name="id_matkul" required>
                             <option value="">-- Pilih Matkul --</option>
                             <?php foreach($matkul as $m):?>
-                                <option value="<?= $m['id_matkul']; ?>" <?= (isset($peminjaman['id_matkul']) && ($peminjaman['id_matkul'] == $m['id_matkul'])) ? 'selected' : ''; ?> > <?= $m['nama_matkul'] ?></option>
+                                <option value="<?= $m['id_matkul']; ?>" <?= old('id_matkul', $peminjaman['id_matkul'] ?? '') == $m['id_matkul'] ? 'selected' : ''; ?> > <?= $m['nama_matkul'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -54,7 +57,7 @@
                     </div>
                     <div class="input-container">
                         <label for="tanggal-mulai">Tanggal & Jam Mulai</label>
-                        <input type="datetime-local" name="waktu_mulai" id="tanggal-mulai" value="<?= isset($peminjaman['waktu_mulai']) ? $peminjaman['waktu_mulai'] : ''?>"  required/>
+                        <input type="datetime-local" name="waktu_mulai" id="tanggal-mulai" value="<?= old('waktu_mulai', isset($peminjaman['waktu_mulai']) ? $peminjaman['waktu_mulai'] : '')?>"  required/>
                     </div>
                 </div>
 
@@ -64,7 +67,7 @@
                     </div>
                     <div class="input-container">
                         <label for="tanggal-selesai">Tanggal & Jam Selesai</label>
-                        <input type="datetime-local" name="waktu_selesai" id="tanggal-selesai" value="<?= isset($peminjaman['waktu_selesai']) ? $peminjaman['waktu_selesai'] : '' ?>" required/>
+                        <input type="datetime-local" name="waktu_selesai" id="tanggal-selesai" value="<?= old('waktu_selesai', isset($peminjaman['waktu_selesai']) ? $peminjaman['waktu_selesai'] : '' ) ?>" required/>
                     </div>
                 </div>
 
@@ -77,7 +80,7 @@
                         <select id="nama_ruang" name="id_ruangan" required>
                             <option value="">-- Pilih Ruang --</option>
                             <?php foreach($ruangan as $r):?>
-                                <option value="<?= $r['id_ruangan']; ?>" <?= (isset($peminjaman['id_ruangan']) && ($peminjaman['id_ruangan'] == $r['id_ruangan'])) ? 'selected' : ''; ?> > <?= $r['nama_ruang'] ?> - <?= $r['kapasitas'] ?> Orang </option>
+                                <option value="<?= $r['id_ruangan']; ?>" <?= old('id_ruangan', $peminjaman['id_ruangan'] ?? '') == $r['id_ruangan'] ? 'selected' : ''; ?> > <?= $r['nama_ruang'] ?> - <?= $r['kapasitas'] ?> Orang </option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -89,7 +92,7 @@
                     </div>
                     <div class="input-container">
                         <label for="sarana">Sarana</label>
-                        <textarea id="sarana" name="sarana" rows="4" required><?= (isset($peminjaman['sarana']) ? $peminjaman['sarana'] : '') ?></textarea>
+                        <textarea id="sarana" name="sarana" rows="4" required><?= old('sarana', isset($peminjaman['sarana']) ? $peminjaman['sarana'] : '') ?></textarea>
                     </div>
                 </div>
 
@@ -112,7 +115,7 @@
                             <i class="fas fa-comment-alt"></i> </div>
                         <div class="input-container">
                             <label for="komentar">Komentar</label>
-                            <textarea id="komentar" name="komentar" rows="4" required><?= (isset($peminjaman['komentar']) ? $peminjaman['komentar'] : '') ?></textarea>
+                            <textarea id="komentar" name="komentar" rows="4" required> <?= (isset($peminjaman['komentar']) ? $peminjaman['komentar'] : '') ?></textarea>
                         </div>
                     </div>
                 <?php endif; ?>

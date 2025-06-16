@@ -6,6 +6,7 @@ use App\Models\DosenModel;
 use App\Models\MatkulModel;
 use App\Models\PeminjamanModel;
 use App\Models\RuangModel;
+use DateTime;
 
 class Peminjaman extends BaseController {
     protected $peminjamanModel;
@@ -53,6 +54,13 @@ class Peminjaman extends BaseController {
         // menyimpan prubahan yang dilakukan
         $idPeminjaman = $this->request->getPost('id_peminjaman');
         $idUser = session()->get('id_user');
+        $waktuMulai = DateTime::createFromFormat('Y-m-d\TH:i', $this->request->getPost('waktu_mulai'));
+        $waktuSelesai = DateTime::createFromFormat('Y-m-d\TH:i', $this->request->getPost('waktu_selesai'));
+
+        // validasi untuk waktuMulai dan waktuSelesai
+        if ($waktuMulai > $waktuSelesai) {
+            return redirect()->back()->withInput()->with('error', 'Waktu mulai tidak boleh melebihi waktu selesai!');
+        } 
 
         $data = [
             'id_pengguna' => $idUser,

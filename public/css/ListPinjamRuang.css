@@ -118,9 +118,14 @@ h2 {
 }
 
 .navigation-buttons {
+    margin-top: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.navigation-btn-dashboard {
+    margin-top: 20px;
 }
 
 /* Search */
@@ -128,6 +133,7 @@ h2 {
     display: flex;
     justify-content: end;
     align-items: center;
+    margin-top: 10px;
     margin-bottom: 15px;
     gap: 10px;
 }
@@ -212,7 +218,6 @@ tr:hover {
     background-color: #0099ff;
     color: white;
 }
-
 
 .empty-notif {
     font-size: 1.1em; 

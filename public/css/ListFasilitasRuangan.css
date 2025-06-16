@@ -1,6 +1,6 @@
 /* --- Reset & Gaya Dasar --- */
 * {
-    margin: 0;
+    margin: 0  ;
     padding: 0;
     box-sizing: border-box;
 }
@@ -16,7 +16,7 @@ body {
     align-items: center;
     background-color: #B3E5FC;
     color: black;
-    padding: 1rem 3rem;
+    padding: 1rem;
     border-bottom: 1px solid #dee2e6;
 }
 
@@ -25,30 +25,29 @@ body {
     flex-direction: column;
 }
 
+
+
 .header-brand {
+    font-size: 1.25rem;
     font-weight: 700;
-    font-size: 1.8rem;
-    letter-spacing: 1px;
-    line-height: 1.2;
+    color: #111827;
 }
 
 .header-title {
-    font-weight: 500;
-    font-size: 0.85rem;
-    text-transform: none;
-    color: #6c757d;
+    font-size: 0.875rem;
+    color: #6b7280;
 }
 
 .main-container {
     max-width: 1300px;
     margin: 0 auto;
-    padding: 2.5rem;
+    padding: 2rem 1rem;
 }
 
 .room-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-    gap: 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
 }
 
 .room-card {
