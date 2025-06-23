@@ -80,6 +80,7 @@ class Authentication extends BaseController
                 ]
             ]
         ];
+
         if(!$this->validate($validateRules)) {
             return redirect()->back()->withInput()->with('validation', $this->validator);
         }
@@ -88,6 +89,7 @@ class Authentication extends BaseController
             'username' => $this->request->getPost('username'),
             'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
             'email' => $this->request->getPost('email'),
+            'role' => 'user',
             'nomor_telepon' => $this->request->getPost('nomor_telepon'),
         ];
         
@@ -98,10 +100,12 @@ class Authentication extends BaseController
     }
 
     public function forgotPwdForm() {
+        // menampilkan halaman forgot password
         return view('authentications/forgot_pwd_form_vw', ['validation' => session('validation')]);
     }
 
     public function sendResetLink() {
+        // mengirimkan link reset password
         $email = $this->request->getPost('email');
 
         $validationRules = [
@@ -113,16 +117,11 @@ class Authentication extends BaseController
             ]
         ];
 
-        if (!$this->validate($validationRules)) {
-            return redirect()->back()->withInput()->with('validation', $this->validator);
-        }
+        if(!$this->validate($validationRules)) {return redirect()->back()->withInput()->with('validation', $this->validator);}
 
         $user = $this->userModel->where('email', $email)->first();
 
-        if(empty($user)) {
-            session()->setFlashdata('error', 'Email Tidak Ditemukan!');
-            return redirect()->to(route_to('forgot_password'));
-        }
+        if(empty($user)) {return redirect()->back()->with('error', 'Email Tidak Ditemukan!');}
 
         $tokenresetPwd = bin2hex(random_bytes(32));
         $tokenExp = date('Y-m-d H:i:s', strtotime('+1 hour'));
@@ -149,13 +148,13 @@ class Authentication extends BaseController
     }
 
     public function resetPwdForm() {
+        // menampilkan form untuk update password
         $token = $this->request->getGet('token');
+        $user = $this->userModel->where('token', $token)->first();
 
         if(empty($token)) {
             return redirect()->to(route_to('login'))->with('error', 'Token reset password tidak valid atau hilang.');
         }
-
-        $user = $this->userModel->where('token', $token)->first();
 
         if(empty($user) || $user['token_exp'] < date('Y-m-d H:i:s')) {
             return redirect()->to(route_to('login'))->with('error', 'Token reset password tidak valid atau sudah kadaluarsa.');
@@ -170,9 +169,9 @@ class Authentication extends BaseController
     }
 
     public function updatePwd() {
+        // memperbarui password di database
         $token = $this->request->getPost('token');
         $newPassword = $this->request->getPost('password');
-        $confirmPassword = $this->request->getPost('confirm_password');
         
         $validationRules = [
             'token' => 'required', 
@@ -197,8 +196,7 @@ class Authentication extends BaseController
         $user = $this->userModel->where('token', $token)->first();
 
         if (empty($user) || $user['token_exp'] < date('Y-m-d H:i:s')) {
-            session()->setFlashdata('error', 'Token reset password tidak valid atau sudah kadaluarsa.');
-            return redirect()->to(route_to('login'));
+            return redirect()->to(route_to('login'))->with('error', 'Token reset password tidak valid atau sudah kadaluarsa.');
         }
 
         $this->userModel->update($user['id_pengguna'], [
@@ -207,13 +205,13 @@ class Authentication extends BaseController
             'token_exp' => null,
         ]);
 
-        session()->setFlashdata('success', 'Password Anda berhasil diubah. Silakan login dengan password baru.');
-        return redirect()->to(route_to('login'));  
+        return redirect()->to(route_to('login'))->with('success', 'Password Anda berhasil diubah. Silakan login dengan password baru.');  
     }
 
     public function logout() {
         // melakukan logout
         session()->destroy();
+
         return redirect()->to('/');
     }
 

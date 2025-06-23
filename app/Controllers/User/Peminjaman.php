@@ -54,13 +54,31 @@ class Peminjaman extends BaseController {
         // menyimpan prubahan yang dilakukan
         $idPeminjaman = $this->request->getPost('id_peminjaman');
         $idUser = session()->get('id_user');
+        $idRuangan = $this->request->getPost('id_ruangan');
         $waktuMulai = DateTime::createFromFormat('Y-m-d\TH:i', $this->request->getPost('waktu_mulai'));
         $waktuSelesai = DateTime::createFromFormat('Y-m-d\TH:i', $this->request->getPost('waktu_selesai'));
+        $waktuSaatIni = new DateTime();
+        $waktuSaatIni->setTime($waktuSaatIni->format('H'), $waktuSaatIni->format('i'),0,0);
 
         // validasi untuk waktuMulai dan waktuSelesai
-        if ($waktuMulai > $waktuSelesai) {
-            return redirect()->back()->withInput()->with('error', 'Waktu mulai tidak boleh melebihi waktu selesai!');
-        } 
+        if($waktuMulai > $waktuSelesai) {return redirect()->back()->withInput()->with('error', 'Waktu mulai tidak boleh melebihi waktu selesai!');} 
+        else if($waktuMulai == $waktuSelesai) {return redirect()->back()->withInput()->with('error', 'Waktu mulai tidak boleh sama dengan waktu selesai!');}
+        else if($waktuMulai < $waktuSaatIni) {return redirect()->back()->withInput()->with('error', 'Waktu mulai tidak boleh kurang dari waktu saat ini!');}
+        
+        // $conflictQuery = $this->peminjamanModel->builder()
+        //                                        ->where('id_ruangan', $idRuangan)
+        //                                        ->where('waktu_mulai <', $waktuSelesai)
+        //                                        ->where('waktu_selesai >', $waktuMulai)
+        //                                        ->groupStart()
+        //                                             ->where('status_peminjaman', 'Menunggu🔄')
+        //                                             ->orWhere('status_peminjaman', 'Disetujui✅')
+        //                                         ->groupEnd();
+
+        // $conflictPeminjaman = $conflictQuery->get()->getResultArray();
+
+        // if(!empty($conflictPeminjaman)) {
+        //     return redirect()->back()->withInput()->with('error', 'Ruangan ini sudah dipinjam, silahkan pilih waktu atau ruangan lain!');
+        // }
 
         $data = [
             'id_pengguna' => $idUser,
@@ -73,11 +91,14 @@ class Peminjaman extends BaseController {
             'status_peminjaman' => 'Menunggu🔄',
             'komentar' => '',
         ];
+
         if($idPeminjaman) {
+            //save untuk update data
             $this->peminjamanModel->update($idPeminjaman, $data);
             session()->setFlashdata('success', 'Peminjaman Berhasil Diperbarui.');
         }
         else {
+            // save untuk insert data
             $this->peminjamanModel->insert($data);
             session()->setFlashdata('success', 'Peminjaman Berhasil Diajukan.');
         }

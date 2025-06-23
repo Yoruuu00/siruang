@@ -23,20 +23,8 @@ class Peminjaman extends BaseController {
         $this->usersModel = new UserModel(); 
     }
 
-    // public function index() {
-    //     // menampilkan halaman form
-    //     $data = [
-    //         'dosen' => $this->dosenModel->findAll(),
-    //         'matkul' => $this->matkulModel->findAll(),
-    //         'ruangan' => $this->ruanganModel->findAll(),
-    //         'users' => $this->usersModel->findAll(),
-    //     ];
-
-    //     return view('formPeminjaman_vw', $data);
-    // }
-
     public function edit($id) {
-        // melakukan edit peminjaman
+        // melakukan edit peminjaman di form
         $data = [
             'dosen' => $this->dosenModel->findAll(),
             'matkul' => $this->matkulModel->findAll(),
@@ -85,15 +73,13 @@ class Peminjaman extends BaseController {
             $pesan = "Halo " . $namaPeminjam['username']. "\n";
             $pesan .= "Peminjaman Ruang Kamu dengan Id:" . $idPeminjaman . "\n";
             $pesan .= "telah " . $data['status_peminjaman'] . "\n";
-            $pesan .= "Dengan Komentar dari admin: " . $data['komentar'];
+            $pesan .= "Dengan Komentar dari admin: " . $data['komentar']. "\n\n";
+            $pesan .= "Jika ada yang ingin ditanyakan ke admin, kamu bisa menghubungi lewat nomor ini";
             sendWhatsAppFonnte($nomorTeleponUser, $pesan);   
 
+            //save untuk update data
             $this->peminjamanModel->update($idPeminjaman, $data);
             session()->setFlashdata('success', 'Peminjaman Berhasil Diperbarui.');
-        }
-        else {
-            $this->peminjamanModel->insert($data);
-            session()->setFlashdata('success', 'Peminjaman Berhasil Diajukan.');
         }
 
         return redirect()->to(route_to('admin_dashboard'));

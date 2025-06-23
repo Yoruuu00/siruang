@@ -19,9 +19,6 @@
             <?php if(session()->getFlashdata('success')): ?>
                 <div class="alert success"><?= esc(session()->getFlashdata('success')) ?></div>
             <?php endif; ?>
-            <?php if(session()->getFlashdata('info')): ?>
-                <div class="alert info"><?= esc(session()->getFlashdata('info')) ?></div>
-            <?php endif; ?>
     
             <form action="<?= route_to('send_reset_link') ?>" method="post">
                 <?= csrf_field() ?>
