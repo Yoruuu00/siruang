@@ -65,20 +65,20 @@ class Peminjaman extends BaseController {
         else if($waktuMulai == $waktuSelesai) {return redirect()->back()->withInput()->with('error', 'Waktu mulai tidak boleh sama dengan waktu selesai!');}
         else if($waktuMulai < $waktuSaatIni) {return redirect()->back()->withInput()->with('error', 'Waktu mulai tidak boleh kurang dari waktu saat ini!');}
         
-        // $conflictQuery = $this->peminjamanModel->builder()
-        //                                        ->where('id_ruangan', $idRuangan)
-        //                                        ->where('waktu_mulai <', $waktuSelesai)
-        //                                        ->where('waktu_selesai >', $waktuMulai)
-        //                                        ->groupStart()
-        //                                             ->where('status_peminjaman', 'Menunggu🔄')
-        //                                             ->orWhere('status_peminjaman', 'Disetujui✅')
-        //                                         ->groupEnd();
+        $conflictQuery = $this->peminjamanModel->builder()
+                                               ->where('id_ruangan', $idRuangan)
+                                               ->where('waktu_mulai <', $waktuSelesai->format('Y-m-d H:i:s'))
+                                               ->where('waktu_selesai >', $waktuMulai->format('Y-m-d H:i:s'))
+                                               ->groupStart()
+                                                    ->where('status_peminjaman', 'Menunggu🔄')
+                                                    ->orWhere('status_peminjaman', 'Disetujui✅')
+                                                ->groupEnd();
 
-        // $conflictPeminjaman = $conflictQuery->get()->getResultArray();
+        $conflictPeminjaman = $conflictQuery->get()->getResultArray();
 
-        // if(!empty($conflictPeminjaman)) {
-        //     return redirect()->back()->withInput()->with('error', 'Ruangan ini sudah dipinjam, silahkan pilih waktu atau ruangan lain!');
-        // }
+        if(!empty($conflictPeminjaman)) {
+            return redirect()->back()->withInput()->with('error', 'Ruangan ini sudah dipinjam, silahkan pilih waktu atau ruangan lain!');
+        }
 
         $data = [
             'id_pengguna' => $idUser,
