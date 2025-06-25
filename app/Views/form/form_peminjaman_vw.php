@@ -92,11 +92,11 @@
                     </div>
                     <div class="input-container">
                         <label for="sarana">Sarana</label>
-                        <textarea id="sarana" name="sarana" rows="4" required><?= old('sarana', isset($peminjaman['sarana']) ? $peminjaman['sarana'] : '') ?></textarea>
+                        <textarea id="sarana" name="sarana" rows="4"><?= old('sarana', isset($peminjaman['sarana']) ? $peminjaman['sarana'] : '') ?></textarea>
                     </div>
                 </div>
 
-                <?php if(session()->get('role') == 'admin'): ?>           
+                <?php if(session()->get('role') == 'admin'): ?>      
                     <div class="form-group">
                         <div class="icon-container">
                             <i class="fas fa-info-circle"></i> </div>
@@ -115,12 +115,16 @@
                             <i class="fas fa-comment-alt"></i> </div>
                         <div class="input-container">
                             <label for="komentar">Komentar</label>
-                            <textarea id="komentar" name="komentar" rows="4" required> <?= (isset($peminjaman['komentar']) ? $peminjaman['komentar'] : '') ?></textarea>
+                            <textarea id="komentar" name="komentar" rows="4"> <?= (isset($peminjaman['komentar']) ? $peminjaman['komentar'] : '') ?></textarea>
                         </div>
                     </div>
                 <?php endif; ?>
-                    
-                <button type="submit" name="submit" class="submit-btn"><?= isset($peminjaman['id_peminjaman']) ? 'Simpan Perubahan' : 'Ajukan Peminjaman' ?></button>
+                
+                <div class="button-container">
+                    <a href="<?= base_url(route_to(session()->get('role') == 'admin' ? 'admin_dashboard' : 'user_dashboard')) ?>" class="back-btn">Kembali</a>
+                    <button type="submit" name="submit" class="submit-btn"><?= isset($peminjaman['id_peminjaman']) ? 'Simpan Perubahan' : 'Ajukan Peminjaman' ?></button>
+                </div>
+                
                 <p class="disclaimer"><?= isset($peminjaman['id_peminjaman']) && session()->get('role') == 'admin' ? '*Menekan Simpan Perubahan juga akan mengirimkan konfirmasi ke pengguna melalui Whatsapp' : '' ?></p>
             </form>
         </div>

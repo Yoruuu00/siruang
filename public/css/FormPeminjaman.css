@@ -113,12 +113,12 @@ textarea {
     border-radius: 5px;
     font-weight: bold;
     cursor: pointer;
-    margin-top: 10px;
     font-size: 14px;
+    transition: background-color 0.3s;
 }
 
 .submit-btn:hover {
-    background-color: #0275d8;
+    background-color: #025aa5;
 }
 
 input::placeholder, textarea::placeholder {
@@ -133,4 +133,31 @@ input::placeholder, textarea::placeholder {
     .form-container {
         padding: 20px;
     }
+}
+
+
+
+.button-container {
+    display: flex;
+    gap: 10px; 
+    margin-top: 10px;
+}
+
+.back-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #0275d8; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.back-btn:hover {
+    background-color: #025aa5;
 }
